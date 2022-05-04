@@ -2240,6 +2240,7 @@ func (s *BgpServer) StartBgp(ctx context.Context, r *api.StartBgpRequest) error 
 
 		if c.Config.Port > 0 {
 			acceptCh := make(chan *net.TCPConn, 32)
+			s.logger.Warn("channel queue set to 32", log.Fields{})
 			for _, addr := range c.Config.LocalAddressList {
 				l, err := newTCPListener(s.logger, addr, uint32(c.Config.Port), g.BindToDevice, acceptCh)
 				if err != nil {
